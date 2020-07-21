@@ -1,0 +1,7 @@
+{
+  "name": "Stocker",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
