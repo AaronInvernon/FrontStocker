@@ -8,14 +8,36 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+
+import { ClientsPage } from './pages/clients/clients.page';
+import { EmployeesPage } from './pages/employees/employees.page';
+import { OrdersPage } from './pages/orders/orders.page';
+import { BillsPage } from './pages/bills/bills.page';
+import { ProductsPage } from './pages/products/products.page';
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [
+    AppComponent,
+    ClientsPage,
+    EmployeesPage,
+    OrdersPage,
+    BillsPage,
+    ProductsPage
+  ],
+  entryComponents: [
+    ClientsPage,
+    EmployeesPage,
+    OrdersPage,
+    BillsPage,
+    ProductsPage
+  ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     StatusBar,
