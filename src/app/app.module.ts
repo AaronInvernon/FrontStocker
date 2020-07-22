@@ -13,6 +13,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 
+import { LoginPage } from './pages/login/login.page';
 import { ClientsPage } from './pages/clients/clients.page';
 import { EmployeesPage } from './pages/employees/employees.page';
 import { OrdersPage } from './pages/orders/orders.page';
@@ -27,6 +28,7 @@ import { ProductFormPage } from './pages/product-form/product-form.page';
 @NgModule({
   declarations: [
     AppComponent,
+    LoginPage,
     ClientsPage,
     EmployeesPage,
     OrdersPage,
@@ -39,6 +41,7 @@ import { ProductFormPage } from './pages/product-form/product-form.page';
     ProductFormPage
   ],
   entryComponents: [
+    LoginPage,
     ClientsPage,
     EmployeesPage,
     OrdersPage,

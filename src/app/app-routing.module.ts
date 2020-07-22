@@ -6,7 +6,7 @@ import { ClientsPageModule } from './pages/clients/clients.module';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/Inbox',
+    redirectTo: '/index',
     pathMatch: 'full'
   },
   {
@@ -52,6 +52,14 @@ const routes: Routes = [
   {
     path: 'products/add',
     loadChildren: () => import('./pages/product-form/product-form.module').then( m => m.ProductFormPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'index',
+    loadChildren: () => import('./pages/index/index.module').then( m => m.IndexPageModule)
   }
 ];
 

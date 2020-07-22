@@ -10,7 +10,7 @@
     Back
   </ion-button>
   <h1>FORM ADD NEW CLIENT</h1>
-  <form [formGroup]="clientForm" (ngSubmit)="submitForm()">
+  <form [formGroup]="clientForm" (ngSubmit)="createClient()">
     <ion-item>
       <ion-label>Name</ion-label>
       <ion-input formControlName="name" type="text" required></ion-input>

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { Router } from '@angular/router';
+
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-product-form',
@@ -9,7 +12,11 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 export class ProductFormPage implements OnInit {
 
   productForm: FormGroup;
-  constructor(public fb: FormBuilder) { }
+  user: User;
+
+  constructor(
+    private router:Router,
+    public fb: FormBuilder) { }
 
   ngOnInit() {
     this.productForm = this.fb.group({
@@ -19,6 +26,14 @@ export class ProductFormPage implements OnInit {
       maker: ['', [Validators.required]],
       price: ['', [Validators.required]]
     });
+
+    if (this.user == null){
+      this.router.navigate(['/login']);
+    } /*else {
+      this.clientService.getClients().subscribe((clients) => {
+        this.clients = clients;
+      });
+    }*/
   }
 
   submitForm() {

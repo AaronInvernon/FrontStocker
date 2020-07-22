@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { Router } from '@angular/router';
+
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-bill-form',
@@ -9,7 +12,11 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 export class BillFormPage implements OnInit {
 
   billForm: FormGroup;
-  constructor(public fb: FormBuilder) { }
+  user: User;
+  constructor(
+    public fb: FormBuilder,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.billForm = this.fb.group({
@@ -17,6 +24,15 @@ export class BillFormPage implements OnInit {
       orderId: ['', [Validators.required]],
       price: ['', [Validators.required]]
     });
+
+    if (this.user == null){
+      this.router.navigate(['/login']);
+    }/* else {
+      this.leadService.getLeads().subscribe((leads) => {
+        console.log(leads);
+        this.leads = leads;
+      });
+    }*/
   }
 
   submitForm() {

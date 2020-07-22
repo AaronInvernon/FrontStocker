@@ -2,14 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { Client } from '../models/clients.model';
 import { User } from '../models/user.model';
+import { Bill } from '../models/bill.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ClientServiceService {
-  allClientsUrl: string = 'https://localhost:8080/clients';
+export class BillService {
+
+  allBillsUrl: string = 'https://localhost:8080/bills';
 
   user: User = JSON.parse(localStorage.getItem('currentUser'));
 
@@ -21,9 +22,9 @@ export class ClientServiceService {
 
   constructor(private http: HttpClient) { }
 
-  getClients(): Observable<Client[]>{
+  getBills(): Observable<Bill[]>{
     this.loadHttp();
-    return this.http.get<Client[]>(this.allClientsUrl, this.httpOptions);
+    return this.http.get<Bill[]>(this.allBillsUrl, this.httpOptions);
   }
 
   loadHttp() {
