@@ -5,8 +5,13 @@
 </ion-header>
 
 <ion-content>
-  <ion-button expand="block" color="tertiary">
+  <ion-button expand="block" color="tertiary"  [routerLink]="['/products/add']">
     <ion-icon slot="add" name="star"></ion-icon>
     New product
   </ion-button>
+  <ion-list>
+    <button ion-item *ngFor="let product of products">
+        {{product.id}} - {{ product.name}}
+    </button>
+  </ion-list>
 </ion-content>

@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Product-form</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-button expand="block" color="danger" [routerLink]="['/products']">
+    <ion-icon slot="add" name="star"></ion-icon>
+    Back
+  </ion-button>
+  <h1>FORM ADD NEW PRODUCT</h1>
+  <form [formGroup]="productForm" (ngSubmit)="submitForm()">
+    <ion-item>
+      <ion-label>Name</ion-label>
+      <ion-input formControlName="name" type="text" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Maker</ion-label>
+      <ion-input formControlName="maker" type="text" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Description</ion-label>
+      <ion-input formControlName="description" type="text" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Quantity</ion-label>
+      <ion-input formControlName="quantity" type="number" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Price</ion-label>
+      <ion-input formControlName="price" type="number" required></ion-input>
+    </ion-item>
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="tertiary" expand="block">Submit</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

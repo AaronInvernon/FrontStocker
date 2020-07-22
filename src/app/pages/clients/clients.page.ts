@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ClientFormPage } from '../client-form/client-form.page';
 
 @Component({
   selector: 'app-clients',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClientsPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit() {
+
+  }
+  navigate(){
+    this.router.navigate(['/add'])
   }
 
 }

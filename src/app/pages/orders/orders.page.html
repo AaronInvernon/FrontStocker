@@ -5,8 +5,13 @@
 </ion-header>
 
 <ion-content>
-  <ion-button expand="block" color="tertiary">
+  <ion-button expand="block" color="tertiary"  [routerLink]="['/orders/add']">
     <ion-icon slot="add" name="star"></ion-icon>
     New order
   </ion-button>
+  <ion-list>
+    <button ion-item *ngFor="let order of orders">
+        {{order.id}} - {{ order.name}}
+    </button>
+  </ion-list>
 </ion-content>
