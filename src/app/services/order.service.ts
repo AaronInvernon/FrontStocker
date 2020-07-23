@@ -27,6 +27,13 @@ export class OrderService {
     return this.http.get<Order[]>(this.allOrdersUrl, this.httpOptions);
   }
 
+  createOrder(order: any): Observable<any>{
+    this.loadHttp();
+
+    return this.http
+    .post<Order>(this.allOrdersUrl, order);
+  }
+
   loadHttp() {
     this.user = JSON.parse(localStorage.getItem('currentUser'));
     if (this.user != null){

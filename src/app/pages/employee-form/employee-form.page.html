@@ -10,7 +10,7 @@
     Back
   </ion-button>
   <h1>FORM ADD NEW Employee</h1>
-  <form [formGroup]="employeeForm" (ngSubmit)="submitForm()">
+  <form [formGroup]="employeeForm" (ngSubmit)="createEmployee()">
     <ion-item>
       <ion-label>Name</ion-label>
       <ion-input formControlName="name" type="text" required></ion-input>

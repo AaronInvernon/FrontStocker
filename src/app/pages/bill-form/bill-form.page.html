@@ -10,7 +10,7 @@
     Back
   </ion-button>
   <h1>FORM ADD NEW BILL</h1>
-  <form [formGroup]="billForm" (ngSubmit)="submitForm()">
+  <form [formGroup]="billForm" (ngSubmit)="createBill()">
     <ion-item>
       <ion-label>Client Id</ion-label>
       <ion-input formControlName="clientId" type="number" required></ion-input>

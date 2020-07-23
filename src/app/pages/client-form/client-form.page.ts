@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
 
 import { User } from '../../models/user.model';
-import { Client } from '../../models/clients.model';
+import { ClientServiceService } from '../../services/client-service.service'
 
 @Component({
   selector: 'app-client-form',
@@ -14,17 +14,19 @@ import { Client } from '../../models/clients.model';
 export class ClientFormPage implements OnInit {
 
   clientForm: FormGroup;
-  user: User;
+  user: User = JSON.parse(localStorage.getItem('currentUser'));
 
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type':  'application/json', Authorization: 'Basic ' + btoa( 'admin' + ':' + '1234')
+      'Content-Type':  'application/json'
     })
     };
+    
   constructor(
     public fb: FormBuilder,
     public http: HttpClient,
-    private router: Router
+    private router: Router,
+    private clientService: ClientServiceService
   ) { }
 
   ngOnInit() {
@@ -39,24 +41,17 @@ export class ClientFormPage implements OnInit {
 
     if (this.user == null){
       this.router.navigate(['/login']);
-    }/* else {
-      this.leadService.getLeads().subscribe((leads) => {
-        console.log(leads);
-        this.leads = leads;
-      });
-    }*/
+    }
   }
 
-  createClient() {
+  createClient(): void {
     console.log(this.clientForm.value)
-    const client = new Client();
-    client.name = this.clientForm.value.name;
-    client.phoneNumber = this.clientForm.value.phoneNumber;
-    client.country = this.clientForm.value.country;
-    client.city = this.clientForm.value.city;
-    client.postCode = this.clientForm.value.postCode;
-    client.street = this.clientForm.value.street;
-    this.http.post('http://localhost:8080/clients', client,this.httpOptions)
+    this.clientService.createClient(this.clientForm.value)
+      .subscribe( data => {
+        this.router.navigate(['/clients']);
+      },
+      error => console.log('oops', error)
+    );
   }
 
 }

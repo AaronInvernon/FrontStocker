@@ -10,7 +10,7 @@
     Back
   </ion-button>
   <h1>FORM ADD NEW PRODUCT</h1>
-  <form [formGroup]="productForm" (ngSubmit)="submitForm()">
+  <form [formGroup]="productForm" (ngSubmit)="createProduct()">
     <ion-item>
       <ion-label>Name</ion-label>
       <ion-input formControlName="name" type="text" required></ion-input>

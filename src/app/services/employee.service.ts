@@ -27,6 +27,13 @@ export class EmployeeService {
     return this.http.get<Employee[]>(this.allEmployeesUrl, this.httpOptions);
   }
 
+  createEmployee(employee: any): Observable<any>{
+    this.loadHttp();
+
+    return this.http
+    .post<Employee>(this.allEmployeesUrl, employee);
+  }
+
   loadHttp() {
     this.user = JSON.parse(localStorage.getItem('currentUser'));
     if (this.user != null){

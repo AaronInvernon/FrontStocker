@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 import { User } from '../../models/user.model';
+import { EmployeeService } from '../../services/employee.service'
+
 
 @Component({
   selector: 'app-employee-form',
@@ -12,11 +15,20 @@ import { User } from '../../models/user.model';
 export class EmployeeFormPage implements OnInit {
 
   employeeForm: FormGroup;
-  user: User;
+  clientForm: FormGroup;
+  user: User = JSON.parse(localStorage.getItem('currentUser'));
+
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json'
+    })
+    };
 
   constructor(
     public fb: FormBuilder,
-    private router:Router
+    private router:Router,
+    public http: HttpClient,
+    private employeeService: EmployeeService
   ) { }
 
   ngOnInit() {
@@ -30,15 +42,17 @@ export class EmployeeFormPage implements OnInit {
 
     if (this.user == null){
       this.router.navigate(['/login']);
-    } /*else {
-      this.clientService.getClients().subscribe((clients) => {
-        this.clients = clients;
-      });
-    }*/
+    }
   }
 
-  submitForm() {
+  createEmployee(): void {
     console.log(this.employeeForm.value)
+    this.employeeService.createEmployee(this.employeeForm.value)
+      .subscribe( data => {
+        this.router.navigate(['/employees']);
+      },
+      error => console.log('oops', error)
+    );
   }
 
 }

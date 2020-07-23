@@ -10,7 +10,7 @@
     Back
   </ion-button>
   <h1>FORM ADD NEW ORDER</h1>
-  <form [formGroup]="orderForm" (ngSubmit)="submitForm()">
+  <form [formGroup]="orderForm" (ngSubmit)="createOrder()">
     <ion-item>
       <ion-label>Client Id</ion-label>
       <ion-input formControlName="clientId" type="text" required></ion-input>

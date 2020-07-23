@@ -27,6 +27,13 @@ export class BillService {
     return this.http.get<Bill[]>(this.allBillsUrl, this.httpOptions);
   }
 
+  createBill(bill: any): Observable<any>{
+    this.loadHttp();
+
+    return this.http
+    .post<Bill>(this.allBillsUrl, bill);
+  }
+
   loadHttp() {
     this.user = JSON.parse(localStorage.getItem('currentUser'));
     if (this.user != null){

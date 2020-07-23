@@ -27,6 +27,13 @@ export class ProductService {
     return this.http.get<Product[]>(this.allProductsUrl, this.httpOptions);
   }
 
+  createProduct(product: any): Observable<any>{
+    this.loadHttp();
+
+    return this.http
+    .post<Product>(this.allProductsUrl, product);
+  }
+
   loadHttp() {
     this.user = JSON.parse(localStorage.getItem('currentUser'));
     if (this.user != null){

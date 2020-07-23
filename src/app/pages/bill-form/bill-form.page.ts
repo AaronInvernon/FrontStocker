@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
 
 import { User } from '../../models/user.model';
+import { BillService } from '../../services/bill.service';
 
 @Component({
   selector: 'app-bill-form',
@@ -12,10 +14,19 @@ import { User } from '../../models/user.model';
 export class BillFormPage implements OnInit {
 
   billForm: FormGroup;
-  user: User;
+  user: User = JSON.parse(localStorage.getItem('currentUser'));
+
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json'
+    })
+    };
+    
   constructor(
     public fb: FormBuilder,
-    private router: Router
+    public http: HttpClient,
+    private router: Router,
+    private billService: BillService
   ) { }
 
   ngOnInit() {
@@ -27,16 +38,17 @@ export class BillFormPage implements OnInit {
 
     if (this.user == null){
       this.router.navigate(['/login']);
-    }/* else {
-      this.leadService.getLeads().subscribe((leads) => {
-        console.log(leads);
-        this.leads = leads;
-      });
-    }*/
+    }
   }
 
-  submitForm() {
+  createBill(): void {
     console.log(this.billForm.value)
+    this.billService.createBill(this.billForm.value)
+      .subscribe( data => {
+        this.router.navigate(['/bills']);
+      },
+      error => console.log('oops', error)
+    );
   }
 
 }

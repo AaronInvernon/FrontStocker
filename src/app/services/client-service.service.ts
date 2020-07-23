@@ -26,6 +26,13 @@ export class ClientServiceService {
     return this.http.get<Client[]>(this.allClientsUrl, this.httpOptions);
   }
 
+  createClient(client: any): Observable<any>{
+    this.loadHttp();
+
+    return this.http
+    .post<Client>(this.allClientsUrl, client);
+  }
+
   loadHttp() {
     this.user = JSON.parse(localStorage.getItem('currentUser'));
     if (this.user != null){

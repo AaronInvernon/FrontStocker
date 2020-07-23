@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 import { User } from '../../models/user.model';
+import { OrderService } from '../../services/order.service'
 
 @Component({
   selector: 'app-order-form',
@@ -12,10 +14,18 @@ import { User } from '../../models/user.model';
 export class OrderFormPage implements OnInit {
 
   orderForm: FormGroup;
-  user: User;
+  user: User = JSON.parse(localStorage.getItem('currentUser'));
+
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json'
+    })
+    };
   constructor(
     public fb: FormBuilder,
-    private router: Router
+    public http: HttpClient,
+    private router: Router,
+    private orderService: OrderService
   ) { }
 
   ngOnInit() {
@@ -26,15 +36,17 @@ export class OrderFormPage implements OnInit {
 
     if (this.user == null){
       this.router.navigate(['/login']);
-    } /*else {
-      this.clientService.getClients().subscribe((clients) => {
-        this.clients = clients;
-      });
-    }*/
+    } 
   }
 
-  submitForm() {
+  createOrder() {
     console.log(this.orderForm.value)
+    this.orderService.createOrder(this.orderForm.value)
+      .subscribe( data => {
+        this.router.navigate(['/orders']);
+      },
+      error => console.log('oops', error)
+    );
   }
 
 }
