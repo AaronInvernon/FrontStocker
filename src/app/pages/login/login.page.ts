@@ -21,7 +21,7 @@ export class LoginPage implements OnInit {
     private router: Router
   ) { }
 
-  ngOnInit() {
+  ngOnInit():void {
 
     this.user = JSON.parse(localStorage.getItem('currentUser'));
 
@@ -29,27 +29,26 @@ export class LoginPage implements OnInit {
       this.router.navigate(['/']);
     } else {
       this.loginForm = this.fb.group({
-        clientId: ['', [Validators.required]],
-        orderId: ['', [Validators.required]],
-        price: ['', [Validators.required]]
+        username: ['', [Validators.required]],
+        password: ['', [Validators.required]]
       });
     }
   }
 
   login(): void{
     console.log('iniciamos login');
+    console.log(this.loginForm.value.username + "  " + this.loginForm.value.password)
 
     this.http
-      .post<string>('https://localhost:8080/login', this.loginForm.value)
+      .post<string>('http://localhost:8080/login', this.loginForm.value)
       .subscribe(
         data => {
           this.user = new User();
           this.user.username = this.loginForm.value.username;
           this.user.password = this.loginForm.value.password;
           this.user.role = data;
-
           localStorage.setItem('currentUser', JSON.stringify(this.user));
-          this.router.navigate(['/']);
+          this.router.navigate(['/clients']);
         }
       )
   }
